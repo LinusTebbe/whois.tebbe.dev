@@ -77,7 +77,8 @@ export default {
       return new Promise((resolve) => {
         resolve(
           this.$axios.$get(
-            'https://rdap.db.ripe.net/ip/' + this.$route.params.ipInput
+            'https://rdap.db.ripe.net/ip/' +
+              ('' + this.$route.params.ipInput).trim()
           )
         )
       })
