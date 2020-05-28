@@ -84,7 +84,8 @@ body {
 
 nav a,
 a:active,
-a:link {
+a:link,
+a:visited {
   color: var(--text-color);
   text-decoration: none;
 }
