@@ -69,11 +69,6 @@ html {
   min-height: 100%;
 }
 
-body,
-#__layout > div {
-  min-height: 100% !important;
-}
-
 body {
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   margin: 0;
