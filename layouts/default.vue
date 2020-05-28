@@ -71,7 +71,7 @@ html {
 
 body,
 #__layout > div {
-  min-height: 100vh !important;
+  min-height: 100% !important;
 }
 
 body {
