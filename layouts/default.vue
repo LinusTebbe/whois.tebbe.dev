@@ -3,7 +3,7 @@
   <div>
     <nav>
       <nuxt-link to="/" class="logo">
-        <span class="big">whois.alieris.dev</span>
+        <span class="big">whois.tebbe.dev</span>
         <span class="small">
           <font-awesome-icon :icon="['fas', 'home']" />
         </span>
@@ -22,23 +22,32 @@
         </div>
       </form>
     </nav>
-    <nuxt />
+    <div class="card">
+      This is just a simple WHOIS search service.<br />
+      powered by arin's rdap API(<a href="https://rdap.arin.net"
+        >https://rdap.arin.net</a
+      >)
+    </div>
+    <IPDetails ref="ipDetails" :ip="ipInput"></IPDetails>
   </div>
 </template>
 
 <script>
+import IPDetails from '../components/IPDetails'
 export default {
+  components: { IPDetails },
   data() {
     return {
       ipInput: ''
     }
   },
   created() {
-    this.ipInput = this.$route.params.ipInput
+    this.ipInput = this.$route.query.ip
   },
   methods: {
     submit() {
-      this.$router.push('/whois/' + this.ipInput)
+      this.$router.push('?ip=' + this.ipInput)
+      this.$refs.ipDetails.refresh()
     }
   }
 }

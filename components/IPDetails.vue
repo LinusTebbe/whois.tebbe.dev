@@ -36,7 +36,7 @@
         </tr>
       </table>
     </div>
-    <div v-else class="spinner-body">
+    <div v-if="loading" class="spinner-body">
       <svg
         class="spinner"
         width="65px"
@@ -59,27 +59,43 @@
 </template>
 
 <script>
+import exports from 'ip-validator'
+
 export default {
-  name: 'DetailsPage',
+  name: 'IPDetails',
+  props: {
+    ip: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       response: null,
       address: null,
-      vCardArray: null
+      vCardArray: null,
+      loading: false
     }
   },
-  async mounted() {
-    this.response = await this.fetchInformation()
-    this.vCardArray = this.getVCardArray(this.response.entities)
+  mounted() {
+    this.refresh()
   },
   methods: {
+    async refresh() {
+      if (!exports.ip(this.ip)) return
+      this.loading = true
+      this.response = await this.fetchInformation()
+      this.loading = false
+      if (this.response === undefined) return
+      this.vCardArray = this.getVCardArray(this.response.entities)
+    },
     fetchInformation() {
       return new Promise((resolve) => {
         resolve(
-          this.$axios.$get(
-            'https://rdap.db.ripe.net/ip/' +
-              ('' + this.$route.params.ipInput).trim()
-          )
+          this.$axios
+            .$get('https://rdap.db.ripe.net/ip/' + ('' + this.ip).trim())
+            // eslint-disable-next-line no-console
+            .catch((error) => console.log(error))
         )
       })
     },
