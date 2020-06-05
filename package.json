@@ -1,8 +1,8 @@
 {
-  "name": "whois.alieris.dev",
-  "version": "1.0.0",
+  "name": "whois.tebbe.dev",
+  "version": "1.0.1",
   "description": "Some simple whois client",
-  "author": "ALIERIS-corp",
+  "author": "LinusTebbe",
   "private": true,
   "scripts": {
     "dev": "nuxt",
